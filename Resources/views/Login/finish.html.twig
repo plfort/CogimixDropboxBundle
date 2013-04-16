@@ -1,0 +1,8 @@
+{% if success == true %}
+<script>
+window.parent.refreshPage();
+window.close();
+</script>
+{% else %}
+<center>Something went wrong ...</center>
+{% endif %}

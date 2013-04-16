@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <!--
+    <parameters>
+        <parameter key="cogimix_dropbox.example.class">Cogipix\CogimixDropboxBundle\Example</parameter>
+    </parameters>
+	-->
+    <services>
+        <service id="cogimix_dropbox.dropbox_api" class="Cogipix\CogimixDropboxBundle\Services\DropboxApi">
+            <argument>%dropbox.api.key%</argument>
+            <argument>%dropbox.api.secret%</argument>
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+        
+            <service id="cogimix_dropbox.jsimport_renderer" class="Cogipix\CogimixDropboxBundle\ViewHooks\Javascript\JavascriptImportRenderer">
+                <tag name="cogimix.jsimport_renderer"/>
+           </service>
+           
+           
+           <service id="cogimix_dropbox.menu_renderer" class="Cogipix\CogimixDropboxBundle\ViewHooks\Menu\MenuRenderer">
+                <tag name="cogimix.menu_renderer"/>
+           </service>
+           
+            <service id="cogimix_dropbox.plugin_provider" class="Cogipix\CogimixDropboxBundle\Services\DropboxPluginProvider">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="security.context" />
+            <argument type="service" id="cogimix_dropbox.dropbox_plugin_factory" />
+            <tag name="cogimix.plugin_provider"/>
+        </service>
+        
+         <service id="cogimix_dropbox.dropbox_plugin_factory" class="Cogipix\CogimixDropboxBundle\Services\DropboxPluginFactory">
+              <argument type="service" id="service_container"/>
+         </service>
+          <service id="cogimix_dropbox.result_builder" class="Cogipix\CogimixDropboxBundle\Services\ResultBuilder">
+          
+         </service>
+    </services>
+    
+</container>
