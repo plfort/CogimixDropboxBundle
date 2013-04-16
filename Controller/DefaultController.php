@@ -47,7 +47,7 @@ class DefaultController extends Controller
         $success = false;
         if($result !== false){
             $success=true;
-
+            $em = $this->getDoctrine()->getEntityManager();
             list($accessToken, $dropboxUserId)=$result;
             $user = $this->getUser();
             $accessTokenDb = $em->getRepository('CogimixDropboxBundle:AccessToken')->findOneByUser($user);
