@@ -70,6 +70,26 @@ class DefaultController extends Controller
 
     /**
      * @Secure("ROLE_DROPBOX")
+     * @Route("/logout",name="_dropbox_logout", options={"expose"=true})
+     *
+     */
+    public function logoutAction(){
+        $response = new AjaxResult();
+        $em = $this->getDoctrine()->getEntityManager();
+        $user = $this->getUser();
+        $accessTokenDb = $em->getRepository('CogimixDropboxBundle:AccessToken')->findOneByUser($user);
+        if($accessTokenDb !== null){
+            $em->remove($accessTokenDb);
+        }
+        $user->removeRole('ROLE_DROPBOX');
+        $em->flush();
+        $this->get('security.context')->getToken()->setAuthenticated(false);
+        $response->setSuccess(true);
+       return $response->createResponse();
+    }
+
+    /**
+     * @Secure("ROLE_DROPBOX")
      * @Route("/tmpUrl",name="_dropbox_tmp_url", options={"expose"=true})
      *
      */
