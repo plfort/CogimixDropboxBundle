@@ -12,6 +12,7 @@ use JMS\Serializer\Annotation as JMSSerializer;
 
 class DropboxResult extends TrackResult
 {
+    protected $shareable = false;
 
     public function __construct(){
         parent::__construct();
