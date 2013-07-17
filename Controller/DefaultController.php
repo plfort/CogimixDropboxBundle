@@ -47,7 +47,7 @@ class DefaultController extends Controller
         $success = false;
         if($result !== false){
             $success=true;
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             list($accessToken, $dropboxUserId)=$result;
             $user = $this->getUser();
             $accessTokenDb = $em->getRepository('CogimixDropboxBundle:AccessToken')->findOneByUser($user);
@@ -75,7 +75,7 @@ class DefaultController extends Controller
      */
     public function logoutAction(){
         $response = new AjaxResult();
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $accessTokenDb = $em->getRepository('CogimixDropboxBundle:AccessToken')->findOneByUser($user);
         if($accessTokenDb !== null){
@@ -97,7 +97,7 @@ class DefaultController extends Controller
     public function getTmpUrlAction(Request $request){
         $response = new AjaxResult();
         $dropboxApi = $this->get('cogimix_dropbox.dropbox_api');
-        $em=  $this->getDoctrine()->getEntityManager();
+        $em=  $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $accessTokenDb = $em->getRepository('CogimixDropboxBundle:AccessToken')->findOneByUser($user);
         if($accessTokenDb){
