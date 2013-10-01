@@ -56,7 +56,7 @@ class ResultBuilder{
     }
 
     public function getDefaultIcon(){
-        return 'bundles/cogimixdropbox/images/dropbox-icon.png';
+        return '/bundles/cogimixdropbox/images/dropbox-icon.png';
     }
 
     private function checkMimeType($mime){

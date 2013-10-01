@@ -70,7 +70,7 @@ class DropboxMusicSearch extends AbstractMusicSearch
     }
 
     public function getDefaultIcon(){
-        return 'bundles/cogimixdropbox/images/dropbox-icon.png';
+        return '/bundles/cogimixdropbox/images/dropbox-icon.png';
     }
 
 
