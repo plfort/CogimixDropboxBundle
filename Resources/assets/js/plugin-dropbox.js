@@ -39,9 +39,9 @@ function dropboxPlayer(musicPlayer) {
 			  volume: self.musicPlayer.volume,
 			  onload: function() {
 				  self.musicPlayer.enableControls();
-				  self.musicPlayer.cursor.slider("option", "max", this.duration).progressbar();			  
+				  self.musicPlayer.cursor.slider("option", "max", this.duration/1000).progressbar();			  
 				  self.musicPlayer.bindCursorStop(function(value) {
-					  self.currentSoundObject.setPosition(value);
+					  self.currentSoundObject.setPosition(value*1000);
 					});
 
 			  },
@@ -66,7 +66,7 @@ function dropboxPlayer(musicPlayer) {
 			  whileplaying: function(){
 				 if(self.cancelRequested == false){
 					  if(self.musicPlayer.cursor.data('isdragging')==false){
-					  self.musicPlayer.cursor.slider("value", this.position);
+					  self.musicPlayer.cursor.slider("value", this.position/1000);
 					  }
 				 }else{
 					 self.cancelRequested = false;
