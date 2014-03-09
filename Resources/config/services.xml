@@ -21,8 +21,8 @@
            </service>
            
            
-           <service id="cogimix_dropbox.menu_renderer" class="Cogipix\CogimixDropboxBundle\ViewHooks\Menu\MenuRenderer">
-                <tag name="cogimix.menu_renderer"/>
+           <service id="cogimix_dropbox.menu_renderer" class="Cogipix\CogimixDropboxBundle\ViewHooks\Menu\MenuItem">
+                <tag name="cogimix.menu_item"/>
            </service>
            
             <service id="cogimix_dropbox.plugin_provider" class="Cogipix\CogimixDropboxBundle\Services\DropboxPluginProvider">
