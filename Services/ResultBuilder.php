@@ -28,14 +28,14 @@ class ResultBuilder{
             $track->setTag($this->getResultTag());
             $track->setThumbnails($this->getDefaultIcon());
             $track->setIcon($this->getDefaultIcon());
-           // var_dump($track);die();
+          
         }
 
         return $track;
     }
 
     public function createArrayFromDropboxFiles($dropboxFiles){
-        //var_dump($dropboxFiles);die();
+
         $count=count($dropboxFiles);
 
         $tracks = array();
