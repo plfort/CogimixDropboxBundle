@@ -1,7 +1,7 @@
 {% spaceless %}
-<li id="dropbox-menu">
+<li class="dropdown-submenu" id="dropbox-menu">
     <a href="#">Dropbox (beta)</a>
-    <ul>
+    <ul class="dropdown-menu">
     {% if not is_granted('ROLE_DROPBOX') %}
          <li>{% include 'CogimixDropboxBundle:Login:loginLink.html.twig' %}</li>
     {% else %}
