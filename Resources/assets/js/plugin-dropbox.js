@@ -61,7 +61,7 @@ function dropboxPlayer(musicPlayer) {
 			  },
 			  whileloading: function(){
 				
-				  self.musicPlayer.cursor.slider("option", "max", this.duration).progressbar('value',(this.bytesLoaded/this.bytesTotal)*100 );
+				  self.musicPlayer.cursor.slider("option", "max", this.duration/1000).progressbar('value',(this.bytesLoaded/this.bytesTotal)*100 );
 			  },
 			  whileplaying: function(){
 				 if(self.cancelRequested == false){

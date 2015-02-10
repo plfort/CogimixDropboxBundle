@@ -22,11 +22,7 @@ class AccessToken
      * @var unknown_type
      */
     protected $accessKey;
-    /**
-     * @ORM\Column(type="string")
-     * @var unknown_type
-     */
-    protected $accessSecret;
+
     /**
      * @ORM\Column(type="string")
      * @var unknown_type
@@ -73,16 +69,6 @@ class AccessToken
     public function setAccessKey($accessKey)
     {
         $this->accessKey = $accessKey;
-    }
-
-    public function getAccessSecret()
-    {
-        return $this->accessSecret;
-    }
-
-    public function setAccessSecret($accessSecret)
-    {
-        $this->accessSecret = $accessSecret;
     }
 
 }

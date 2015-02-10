@@ -14,6 +14,8 @@ use Dropbox\WebAuth;
 use Dropbox\AppInfo;
 
 use Dropbox\Config;
+use Symfony\Component\Routing\RouterInterface;
+use Dropbox\ArrayEntryStore;
 
 class DropboxApi{
 
@@ -21,31 +23,33 @@ class DropboxApi{
     private $config;
     private $om;
     private $client;
+    private $router;
 
-    public function __construct($apiKey,$secret,ObjectManager $om){
+    public function __construct($apiKey,$secret,ObjectManager $om,RouterInterface $router){
         $this->om=$om;
-        $appInfo = new AppInfo($apiKey, $secret, AccessType::FullDropbox());
-        $this->config = new Config($appInfo, "Cogimix/1.0");
+        $appInfo = new AppInfo($apiKey, $secret);
+        $csrfTokenStore = new ArrayEntryStore($_SESSION, 'dropbox-auth-csrf-token');
+        $this->webAuth = new WebAuth($appInfo, "Cogimix/1.0", $router->generate('_dropbox_login_finish',array(),true),$csrfTokenStore);
     }
 
     public function getWebAuthUrl($callbackUrl){
-        $webAuth=new WebAuth($this->config);
-          return $webAuth->start($callbackUrl);
+
+          return $this->webAuth->start();
     }
 
-    public function finishWebAuth($requestToken){
-        $webAuth=new WebAuth($this->config);
+    public function finishWebAuth($code){
+
 
         try{
-        return $webAuth->finish($requestToken);
+        return $this->webAuth->finish($code);
         }catch(\Exception $ex){
             return false;
         }
     }
 
     public function createClient($accessToken){
-        $accessToken = new \Dropbox\AccessToken($accessToken->getAccessKey(), $accessToken->getAccessSecret());
-        $this->client = new Client($this->config, $accessToken);
+        //$accessToken = new \Dropbox\AccessToken($accessToken->getAccessKey(), $accessToken->getAccessSecret());
+        $this->client = new Client($accessToken->getAccessKey(),"Cogimix/1.0");
 
     }
 

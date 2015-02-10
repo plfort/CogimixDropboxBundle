@@ -28,8 +28,10 @@ class DefaultController extends Controller
         $response = new AjaxResult();
         $dropboxApi = $this->get('cogimix_dropbox.dropbox_api');
         $response->setSuccess(true);
-        list($requestToken, $authorizeUrl) = $dropboxApi->getWebAuthUrl($this->generateUrl('_dropbox_login_finish',array(),true));
-        $this->get('session')->set('dropboxRequestToken',$requestToken);
+        //list($requestToken, $authorizeUrl) = $dropboxApi->getWebAuthUrl($this->generateUrl('_dropbox_login_finish',array(),true));
+        $authorizeUrl = $dropboxApi->getWebAuthUrl($this->generateUrl('_dropbox_login_finish',array(),true));
+
+        //$this->get('session')->set('dropboxRequestToken',$requestToken);
         $response->addData('authUrl',$authorizeUrl);
         return $response->createResponse();
     }
@@ -39,11 +41,12 @@ class DefaultController extends Controller
      * @Route("/loginfinish",name="_dropbox_login_finish", options={"expose"=true})
      *
      */
-    public function loginFinishAction(){
+    public function loginFinishAction(Request $request){
         $dropboxApi = $this->get('cogimix_dropbox.dropbox_api');
-        $requestToken=$this->get('session')->get('dropboxRequestToken');
+        //$requestToken=$this->get('session')->get('dropboxRequestToken');
         $this->get('session')->remove('dropboxRequestToken');
-        $result =$dropboxApi->finishWebAuth($requestToken);
+
+        $result =$dropboxApi->finishWebAuth($request->query->all());
         $success = false;
         if($result !== false){
             $success=true;
@@ -56,8 +59,8 @@ class DefaultController extends Controller
                 $accessTokenDb->setUser($user);
             }
             $accessTokenDb->setDropboxUserId($dropboxUserId);
-            $accessTokenDb->setAccessKey($accessToken->getKey());
-            $accessTokenDb->setAccessSecret($accessToken->getSecret());
+            $accessTokenDb->setAccessKey($accessToken);
+
             $user->addRole('ROLE_DROPBOX');
             $em->persist($accessTokenDb);
             $em->flush();

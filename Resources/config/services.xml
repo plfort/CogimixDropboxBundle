@@ -14,6 +14,7 @@
             <argument>%dropbox.api.key%</argument>
             <argument>%dropbox.api.secret%</argument>
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="router" />
         </service>
         
             <service id="cogimix_dropbox.jsimport_renderer" class="Cogipix\CogimixDropboxBundle\ViewHooks\Javascript\JavascriptImportRenderer">
