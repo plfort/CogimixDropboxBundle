@@ -3,7 +3,6 @@ namespace Cogipix\CogimixDropboxBundle\Services;
 
 use Cogipix\CogimixDropboxBundle\Entity\DropboxResult;
 
-use Cogipix\CogimixCommonBundle\Entity\TrackResult;
 
 class ResultBuilder{
 

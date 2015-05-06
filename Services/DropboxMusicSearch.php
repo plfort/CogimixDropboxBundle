@@ -3,7 +3,6 @@ namespace Cogipix\CogimixDropboxBundle\Services;
 
 use Dropbox\Config;
 
-use Cogipix\CogimixCommonBundle\Entity\TrackResult;
 
 use Cogipix\CogimixCommonBundle\MusicSearch\AbstractMusicSearch;
 

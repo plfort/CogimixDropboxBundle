@@ -1,23 +1,20 @@
 <?php
 namespace Cogipix\CogimixDropboxBundle\Entity;
 
-use Cogipix\CogimixCommonBundle\Entity\TrackResult;
+use Cogipix\CogimixCommonBundle\Entity\Song;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMSSerializer;
 
 /**
  * @JMSSerializer\AccessType("public_method")
+ * @ORM\MappedSuperclass()
  * @author plfort - Cogipix
  */
 
-class DropboxResult extends TrackResult
+class DropboxResult extends Song
 {
     protected $shareable = false;
 
-    public function __construct(){
-        parent::__construct();
-        // $this->pluginProperties=array('test'=>array('url'=>'','test'=>'hello'));
-    }
 
      public function getEntryId(){
         return $this->getId();
