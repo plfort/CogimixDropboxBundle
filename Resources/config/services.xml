@@ -28,7 +28,7 @@
            
             <service id="cogimix_dropbox.plugin_provider" class="Cogipix\CogimixDropboxBundle\Services\DropboxPluginProvider">
             <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="security.context" />
+            <argument type="service" id="security.token_storage" />
             <argument type="service" id="cogimix_dropbox.dropbox_plugin_factory" />
             <tag name="cogimix.plugin_provider"/>
         </service>

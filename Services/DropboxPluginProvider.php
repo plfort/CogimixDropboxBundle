@@ -5,21 +5,21 @@ namespace Cogipix\CogimixDropboxBundle\Services;
 use Cogipix\CogimixCommonBundle\Plugin\PluginProviderInterface;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class DropboxPluginProvider implements PluginProviderInterface{
 
     private $om;
-    private $securityContext;
+    private $tokenStorage;
     protected $plugins = array();
     protected $pluginProviders;
 
     private $pluginFactory;
 
-    public function __construct(ObjectManager $om,SecurityContextInterface $securityContext,DropboxPluginFactory $factory){
+    public function __construct(ObjectManager $om,TokenStorageInterface $tokenStorage,DropboxPluginFactory $factory){
         $this->om=$om;
-        $this->securityContext=$securityContext;
+        $this->tokenStorage=$tokenStorage;
         $this->pluginFactory=$factory;
 
     }
@@ -51,7 +51,7 @@ class DropboxPluginProvider implements PluginProviderInterface{
 
 
     protected function getCurrentUser() {
-      $token = $this->securityContext->getToken();
+      $token = $this->tokenStorage->getToken();
         if($token != null){
             $user = $token->getUser();
             if ($user instanceof \FOS\UserBundle\Model\UserInterface){

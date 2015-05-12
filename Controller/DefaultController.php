@@ -64,7 +64,7 @@ class DefaultController extends Controller
             $user->addRole('ROLE_DROPBOX');
             $em->persist($accessTokenDb);
             $em->flush();
-            $this->get('security.context')->getToken()->setAuthenticated(false);
+            $this->get('security.token_storage')->getToken()->setAuthenticated(false);
         }
 
         return $this->render('CogimixDropboxBundle:Login:finish.html.twig',array('success'=>$success));
@@ -86,7 +86,7 @@ class DefaultController extends Controller
         }
         $user->removeRole('ROLE_DROPBOX');
         $em->flush();
-        $this->get('security.context')->getToken()->setAuthenticated(false);
+        $this->get('security.token_storage')->getToken()->setAuthenticated(false);
         $response->setSuccess(true);
        return $response->createResponse();
     }
