@@ -22,6 +22,7 @@ class DropboxPluginFactory{
         $dropboxApi = $this->container->get('cogimix_dropbox.dropbox_api');
         $dropboxPlugin = new DropboxMusicSearch($accessToken,$dropboxApi,$resultBuilder);
         $dropboxPlugin->setLogger($this->container->get('logger'));
+        $dropboxPlugin->setSongManager($this->container->get('cogimix.song_manager'));
         //$dropboxPlugin->setAccessToken($accessToken);
 
        return $dropboxPlugin;

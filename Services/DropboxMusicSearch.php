@@ -31,7 +31,6 @@ class DropboxMusicSearch extends AbstractMusicSearch
 
 
            $tracks=$this->resutBuilder->createArrayFromDropboxFiles($output);
-
         }catch(\Exception $ex){
             $this->logger->info($ex->getMessage());
             return array();
@@ -41,8 +40,7 @@ class DropboxMusicSearch extends AbstractMusicSearch
 
     protected function executeQuery()
     {
-          $results=  $this->dropboxApi->search($this->searchQuery->getSongQuery());
-
+        $results=  $this->dropboxApi->search($this->searchQuery->getSongQuery());
         return $this->parseResponse($results);
 
     }
