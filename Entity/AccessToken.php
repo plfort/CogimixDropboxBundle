@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @author plfort - Cogipix
  * @ORM\Entity
+ * @ORM\Table(name="accesstoken")
  */
 class AccessToken
 {
@@ -14,7 +15,7 @@ class AccessToken
     /**
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
     /**
