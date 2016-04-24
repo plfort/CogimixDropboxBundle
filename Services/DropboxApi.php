@@ -14,6 +14,7 @@ use Dropbox\WebAuth;
 use Dropbox\AppInfo;
 
 use Dropbox\Config;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Dropbox\ArrayEntryStore;
 
@@ -29,7 +30,7 @@ class DropboxApi{
         $this->om=$om;
         $appInfo = new AppInfo($apiKey, $secret);
         $csrfTokenStore = new ArrayEntryStore($_SESSION, 'dropbox-auth-csrf-token');
-        $this->webAuth = new WebAuth($appInfo, "Cogimix/1.0", $router->generate('_dropbox_login_finish',array(),true),$csrfTokenStore);
+        $this->webAuth = new WebAuth($appInfo, "Cogimix/1.0", $router->generate('_dropbox_login_finish',array(),UrlGeneratorInterface::ABSOLUTE_URL),$csrfTokenStore);
     }
 
     public function getWebAuthUrl($callbackUrl){
